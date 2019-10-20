@@ -425,14 +425,17 @@ bool gstCamera::buildLaunchStr( gstCameraSrc src )
 	}
 	else
 	{
-		ss << "v4l2src device=" << mCameraStr << " ! ";
-		ss << "video/x-raw, width=(int)" << mWidth << ", height=(int)" << mHeight << ", "; 
-		
+		//ss << "v4l2src device=" << mCameraStr << " ! ";
+		ss << "tcambin "<< "! videoconvert ! ";
+		//ss << "video/x-raw, width=(int)" << mWidth << ", height=(int)" << mHeight << ", ";
+		ss << "video/x-raw, format=RGB ! videoconvert !";
+	/*
 	#if NV_TENSORRT_MAJOR >= 5
 		ss << "format=YUY2 ! videoconvert ! video/x-raw, format=RGB ! videoconvert !";
 	#else
 		ss << "format=RGB ! videoconvert ! video/x-raw, format=RGB ! videoconvert !";
 	#endif
+	*/
 
 		ss << "appsink name=mysink";
 
